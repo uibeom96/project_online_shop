@@ -15,6 +15,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
+    'bootstrap4',
 
     # -------마이 앱-----------
     'users.apps.UsersConfig',
@@ -26,7 +27,8 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.naver', 
+    'allauth.socialaccount.providers.naver',
+    'allauth.socialaccount.providers.google', 
 ]
 
 MIDDLEWARE = [
