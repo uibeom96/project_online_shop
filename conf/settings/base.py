@@ -14,8 +14,19 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
+
+    # -------마이 앱-----------
     'users.apps.UsersConfig',
     'shop.apps.ShopConfig',
+    'accounts.apps.AccountsConfig',
+
+    # -------소셜로그인 --------
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.naver', 
 ]
 
 MIDDLEWARE = [
@@ -66,6 +77,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTH_USER_MODEL = 'users.User'
 
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
 LANGUAGE_CODE = 'ko'
 
 TIME_ZONE = 'Asia/Seoul'
@@ -83,3 +97,12 @@ STATICFILES_DIRS = [ BASE_DIR / 'static' ]
 
 MEDIA_URL = '/meida/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+SITE_ID = 1
+

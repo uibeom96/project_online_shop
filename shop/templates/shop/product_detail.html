@@ -1,1 +1,25 @@
-{{ product.title }}
+{% extends 'base.html' %}
+{% block title %} 디테일 페이지 {% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        <img src="{{ product.image.url }}" width="100%">
+    </div>
+    <div class="col">
+        <h1 class="dosplay-6">{{ product.name }}</h1>
+        <p>
+            <span class="badge badge-secondary">Price</span>
+        {% load humanize %}
+        {{ product.price|intcomma }}원
+        </p>
+
+        <form action="" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="장바구니 담기" class="btn btn-primary btn-sm">
+        </form>
+
+        <h5><span class="badge badge-secondary">Discription</span>{{product.description|linebreaks}}</h5>
+    </div>
+</div>
+{% endblock %}

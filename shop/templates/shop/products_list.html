@@ -34,7 +34,8 @@
                         <h5 class="card-title">{{ product.title }}</h5>
                         <p class="card-text">{{ product.description }}
                             <span class="badge badge-secondary">
-                                {{ product.price }}
+                                {% load humanize %}
+                                {{ product.price|intcomma }}
                             </span>
                         </p>
                         <a href="{{ product.get_absolute_url }}">View Detail</a>

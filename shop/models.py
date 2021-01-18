@@ -1,7 +1,7 @@
 from django.db import models
 from conf.models import BaseModel
 from django.shortcuts import reverse
-
+from django.conf import settings
 class Category(BaseModel):
     title = models.CharField(max_length=50, db_index=True)
     description = models.TextField(blank=True)
@@ -21,6 +21,7 @@ class Category(BaseModel):
 
 class Product(BaseModel):
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, related_name="products")
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     slug = models.SlugField(max_length=50, unique=True, allow_unicode=True)
     image = models.ImageField(upload_to = "products/%Y-%m-%d", blank=True)
