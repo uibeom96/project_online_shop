@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block title %} 상품 리스트 {% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-2">
+        <div class="list-group">
+            <a href="{% url 'shop:products_list' %}" class="list-group-item 
+            {% if not current_category %} active {% endif %}">All</a>
+            {% for category in categoris %}
+                <a href="{{ category.get_absolute_url }}" class="list-group-item 
+                {% if current_category.slug == category.slug %}
+                    active
+                {% endif %}">{{ category.title }}</a>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col">
+        <div class="alert alert-info text-center">
+            {% if current_category %}
+                [카테고리] {{ current_category.title }}
+            {% else %}
+                All Categoris
+            {% endif %}
+        </div>
+        <div class="row">
+            {% for product in products %}
+            <div class="col-md-3">
+                <div class="card">
+                    {% if product.image %}
+                    <img class="card-img-top" src="{{ product.image.url }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.title }}</h5>
+                        <p class="card-text">{{ product.description }}
+                            <span class="badge badge-secondary">
+                                {{ product.price }}
+                            </span>
+                        </p>
+                        <a href="{{ product.get_absolute_url }}">View Detail</a>
+                    </div>      
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-md-1"></div>
+</div>
+
+
+
+<hr>
+
+
+{% endblock %}
