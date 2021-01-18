@@ -16,3 +16,15 @@ SECRET_KEY = get_secret("KEY_DJANGO")
 DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': "project_online_shop_deploy",
+        "USER":     get_secret("KEY_DB_DP_USER"),
+        "PASSWORD": get_secret("KEY_DB_DP_PASSWORD"),
+        "HOST":     get_secret("KEY_DB_DP_HOST"),
+        "PORT":     get_secret("KEY_DB_DP_PORT"),
+    }
+}
