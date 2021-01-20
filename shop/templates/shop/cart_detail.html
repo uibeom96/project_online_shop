@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Shopping cart
+{% endblock %}
+
+{% block content %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">이름</th>
+                <th scope="col">수량</th>
+                <th scope="col">삭제</th>
+                <th scope="col">가격</th>
+                <th scope="col">토탈</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for item in cart %}
+            {% with product=item.product %}
+            <tr>
+                <td scope="row">
+                    <a href="{{ product.get_absolute_url }}">
+                        <h6>{{ product.title }}</h6>
+                    </a>
+                </td>
+                <td>
+                    <form action="{% url 'shop:cart_add' product.id %}" method="post">
+                        {{ item.quantity_form.quantity }}
+                        {{ item.quantity_form.is_update }}
+                        <input type="submit" class="btn btn-primary" value="Update">
+                        {% csrf_token %}
+                    </form>
+                </td>
+                <td class="btn btn-danger"><a href="{% url 'shop:cart_remove' product.id %}" class="text-white">삭제</a></td>
+                <td class="num">${{ item.price }}</td>
+                <td class="num">${{ item.total_price }}</td>
+            </tr>
+            {% endwith %}
+        {% endfor %}
+        
+        </tbody>
+    </table>
+   
+
+    <p class="text-right">
+        <a href='{% url "shop:products_list" %}' class="btn btn-secondary">Continue shopping</a>
+    </p>
+{% endblock %}

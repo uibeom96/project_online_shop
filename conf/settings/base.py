@@ -77,6 +77,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+CART_SESSION_ID = "cart_id"
+
 AUTH_USER_MODEL = 'users.User'
 
 LOGIN_REDIRECT_URL = '/'
